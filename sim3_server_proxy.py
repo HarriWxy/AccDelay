@@ -1,13 +1,6 @@
-
-
 import json
 import socket
-
-
-
-
-
-
+import random
 
 def ex_instruction(ip,port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -105,6 +98,10 @@ def ex_instruction(ip,port):
                 msg_to_client = json.dumps(msg_to_client)
                 client_socket.sendall(msg_to_client.encode())
                 continue
+        except:
+            # clinet disconnected
+            # wait for new connection
+            client_socket, client_address = server_socket.accept()
         finally:
             pass
     return
@@ -120,11 +117,13 @@ def get_route_latency(src,dst):
     ret_path = ["SAT-00001","SAT-00002","SAT-00003","SAT-00004","SAT-00005","SAT-00006","SAT-00007"]
     ret_latency=45.67
     return ret_path,ret_latency
+
 def get_access_latency(src_dst):
     if isinstance(src_dst,tuple):
-        return 16.78 #ms
+        return 16.78  # ms
     elif src_dst=="*":
-        return [2,3,4,5,6,7,8,1,33,2,1,2,4,5,6,7,1,2,3]
+        # return random latency
+        return random.choice([2,3,4,5,6,7,8,1,33,2,1,2,4,5,6,7,1,2,3])
 
 if __name__ == "__main__":
     ex_instruction("127.0.0.1",5555)
