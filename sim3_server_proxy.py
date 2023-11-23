@@ -123,7 +123,7 @@ def get_access_latency(src_dst):
         return 16.78  # ms
     elif src_dst=="*":
         # return random latency
-        return random.choice([2,3,4,5,6,7,8,1,33,2,1,2,4,5,6,7,1,2,3])
+        return random.choice([20,30,40,50,60,70,80,10,33,20,10,20,40,50,60,70,10,20,30])
 
 if __name__ == "__main__":
     ex_instruction("127.0.0.1",5555)
